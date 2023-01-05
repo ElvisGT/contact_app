@@ -2,36 +2,74 @@ import {Request,Response} from 'express'
 import {User} from '../entities/index'
 import { user } from '../types/user';
 
-const getUsers = (req:Request,res:Response) => {
-  console.log(req.body)
+const getUsers = async(req:Request,res:Response) => {
+  const users = await User.find({
+    where:{
+      active:true
+    }
+  })
+
   res.json({
-    msg:"Todos"
+    msg:"ok",
+    users
   })
 }
-const getUser = (req:Request,res:Response) => {
+const getUser = async(req:Request,res:Response) => {
+  const id = parseInt(req.params.id)
+
+  const user = await User.findOneBy({id})
+
+  res.status(200).json({
+    user
+  })
 
 }
-const createUser = (req:Request,res:Response) => {
-  // const {name,password}:user = req.body
+const createUser = async(req:Request,res:Response) => {
+  const {name,password}:user = req.body
 
 
-  console.log(req.body)
+  const user = new User()
+  user.name = name
+  user.password = password
 
-  // const user = new User()
-  // user.name = name
-  // user.password = password
+  await user.save()
 
-  // res.status(201).json({
-  //   msg:'OK',
-  //   user
-  // })
-
-}
-const updateUser = (req:Request,res:Response) => {
+  res.status(201).json({
+    msg:'OK',
+    user
+  })
 
 }
-const deleteUser = (req:Request,res:Response) => {
+const updateUser = async(req:Request,res:Response) => {
+  const {name,password}:user = req.body
+  const id = parseInt(req.params.id)
 
+  const user = await User.findOneBy({id,active:true})
+  
+  if(user){
+    user.name = name
+    user.password = password
+    user.save()
+  }
+
+
+  res.status(200).json({
+    user
+  })
+}
+const deleteUser = async(req:Request,res:Response) => {
+  const id = parseInt(req.params.id)
+
+  const user = await User.findOneBy({})
+
+  if(user){
+    user.active = false
+    user.save()
+  }
+
+  res.status(200).json({
+    user
+  })
 }
 
 export {

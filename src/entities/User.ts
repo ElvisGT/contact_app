@@ -12,7 +12,7 @@ export class User extends BaseEntity {
   name:string
   
   @Column()
-  password:number
+  password:string
 
   @Column({
     default:true

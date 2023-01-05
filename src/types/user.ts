@@ -2,6 +2,6 @@
 export type user = {
   id:number,
   name:string,
-  password:number,
+  password:string,
   active:boolean
 }

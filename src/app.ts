@@ -11,6 +11,7 @@ const paths = {
 
 //middlewares
 app.use(cors())
+app.use(express.json())
 
 //routes
 app.use(paths.users,userRoutes)
