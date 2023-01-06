@@ -1,4 +1,5 @@
 import {Request,Response} from 'express'
+import {genSaltSync,hashSync} from 'bcryptjs'
 import {User} from '../entities/index'
 import { user } from '../types/user';
 
@@ -29,10 +30,13 @@ const getUser = async(req:Request,res:Response) => {
 const createUser = async(req:Request,res:Response) => {
   const {name,password}:user = req.body
 
+  const salt = genSaltSync()
+  const hashedPassword = hashSync(password,salt)
+
 
   const user = new User()
   user.name = name
-  user.password = password
+  user.password = hashedPassword
 
   await user.save()
 
