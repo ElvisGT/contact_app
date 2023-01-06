@@ -3,6 +3,7 @@ import {User} from '../entities/index'
 import { user } from '../types/user';
 
 const getUsers = async(req:Request,res:Response) => {
+  const total = await User.countBy({active:true})
   const users = await User.find({
     where:{
       active:true
@@ -11,6 +12,7 @@ const getUsers = async(req:Request,res:Response) => {
 
   res.json({
     msg:"ok",
+    total,
     users
   })
 }
