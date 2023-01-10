@@ -52,12 +52,15 @@ const updateUser = async(req:Request,res:Response) => {
 
   const user = await User.findOneBy({id,active:true})
   
-  if(user){
-    user.name = name
-    user.password = password
-    user.save()
+  if(!user){
+    return res.status(400).json({
+      msg:"Usuario no existente"
+    })
   }
-
+  
+  user.name = name
+  user.password = password
+  user.save()
 
   res.status(200).json({
     user

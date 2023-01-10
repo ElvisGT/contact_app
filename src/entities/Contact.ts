@@ -14,6 +14,6 @@ export class Contact extends BaseEntity{
   @Column()
   phonenumber:number
 
-  @Column()
+  @Column({default:true})
   active:boolean
 }

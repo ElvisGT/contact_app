@@ -1,7 +1,8 @@
 import {Column, 
         Entity, 
         PrimaryGeneratedColumn,
-        BaseEntity} from 'typeorm'
+        BaseEntity,
+        ManyToMany} from 'typeorm'
 
 @Entity()
 export class User extends BaseEntity {
@@ -18,4 +19,5 @@ export class User extends BaseEntity {
     default:true
   })
   active:boolean
+
 }
