@@ -1,7 +1,11 @@
+import { User } from './User';
 import {Column,
         PrimaryGeneratedColumn,
         Entity, 
-        BaseEntity} from 'typeorm'
+        BaseEntity,
+        ManyToMany,
+        JoinTable,
+        ManyToOne} from 'typeorm'
 
 @Entity()
 export class Contact extends BaseEntity{
@@ -16,4 +20,8 @@ export class Contact extends BaseEntity{
 
   @Column({default:true})
   active:boolean
+
+  @ManyToOne(() => User,(user) => user.contacts)
+  users:User
+
 }

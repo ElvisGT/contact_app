@@ -69,7 +69,7 @@ const updateUser = async(req:Request,res:Response) => {
 const deleteUser = async(req:Request,res:Response) => {
   const id = parseInt(req.params.id)
 
-  const user = await User.findOneBy({})
+  const user = await User.findOneBy({id})
 
   if(user){
     user.active = false
