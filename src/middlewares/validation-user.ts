@@ -1,4 +1,4 @@
-import {User} from '../src/entities/index'
+import {User} from '../entities/index'
 
 export const validateUserName = async(name:string) => {
     const user = await User.findOneBy({name})

@@ -1,12 +1,12 @@
 import { Request,Response } from 'express'
-import { User } from '../entities';
 import {Contact} from '../entities/Contact'
 import { contact } from '../types/contact';
 
 
 const getContacts = async (req:Request,res:Response) => {
-    const id = 1
-    const user = await User.findOneBy({id,active:true}) || {}
+    //@ts-ignore
+    const user = req.logUser
+    const total = await Contact.countBy({active:true,user})
     const contacts = await Contact.find({
         relations:['user'],
         where:{
@@ -15,7 +15,10 @@ const getContacts = async (req:Request,res:Response) => {
         }
     })
 
-    res.json(contacts)
+    res.json({
+        total,
+        contacts
+    })
 }
 
 const getContactByID = async (req:Request,res:Response) => {
@@ -41,9 +44,8 @@ const getContactByID = async (req:Request,res:Response) => {
 
 const createContact = async (req:Request,res:Response) => {
     const {name,phonenumber}:contact = req.body
-    const id = 2
-    const user = await User.findOneBy({id,active:true})
-
+    //@ts-ignore
+    const user = req.logUser
 
     const contact = new Contact()
     contact.name = name

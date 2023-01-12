@@ -2,6 +2,7 @@ import {Request,Response} from 'express'
 import {genSaltSync,hashSync} from 'bcryptjs'
 import {User} from '../entities/index'
 import { user } from '../types/user';
+import {generateJWT} from '../helpers/generateJwt'
 
 const getUsers = async(req:Request,res:Response) => {
   const total = await User.countBy({active:true})
@@ -40,8 +41,14 @@ const createUser = async(req:Request,res:Response) => {
 
   await user.save()
 
+  //Generar JWT
+  const token = await generateJWT(user.id)
+    .then(data => data)
+    .catch(err => res.status(400).json(err))
+
   res.status(201).json({
     msg:'OK',
+    token,
     user
   })
 

@@ -5,3 +5,8 @@ export type user = {
   password:string,
   active:boolean
 }
+
+export type payload = {
+  id:number,
+  iat?:number
+}

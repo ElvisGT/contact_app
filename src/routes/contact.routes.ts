@@ -1,17 +1,41 @@
-import {Router} from 'express'
-import {getContacts,
-        createContact,
-        updateContact,
-        getContactByID,
-        deleteContact} from '../controllers/contact.controller'
+import { Router } from 'express'
+import { verifyJWT } from '../middlewares/verify-JWT';
+import { validationAll } from '../middlewares/validation-all';
+import {
+	getContacts,
+	createContact,
+	updateContact,
+	getContactByID,
+	deleteContact
+} from '../controllers/contact.controller'
 
 const router = Router()
 
-router.get('/',getContacts)
-router.get('/:id',getContactByID)
-router.post('/',createContact)
-router.put('/:id',updateContact)
-router.delete('/:id',deleteContact)
+router.get('/',
+	[verifyJWT,
+		validationAll
+	],
+	getContacts)
+
+router.get('/:id',
+	[verifyJWT,
+		validationAll
+	], getContactByID)
+
+router.post('/',
+	[verifyJWT,
+		validationAll
+	], createContact)
+
+router.put('/:id',
+	[verifyJWT,
+		validationAll
+	], updateContact)
+
+router.delete('/:id',
+	[verifyJWT,
+		validationAll
+	], deleteContact)
 
 
 export default router
