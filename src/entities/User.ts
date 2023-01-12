@@ -3,10 +3,7 @@ import {Column,
         Entity, 
         PrimaryGeneratedColumn,
         BaseEntity,
-        JoinTable,
-        ManyToMany,
-        ManyToOne,
-        OneToMany} from 'typeorm'
+        ManyToMany} from 'typeorm'
 
 @Entity()
 export class User extends BaseEntity {
@@ -24,6 +21,6 @@ export class User extends BaseEntity {
   })
   active:boolean
 
-  @OneToMany(() => Contact,(contact) => contact.users)
-  contacts:Contact
+  @ManyToMany(() => Contact,(contact) => contact.user)
+  contact:Contact[]
 }

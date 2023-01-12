@@ -3,9 +3,8 @@ import {Column,
         PrimaryGeneratedColumn,
         Entity, 
         BaseEntity,
-        ManyToMany,
         JoinTable,
-        ManyToOne} from 'typeorm'
+        ManyToMany} from 'typeorm'
 
 @Entity()
 export class Contact extends BaseEntity{
@@ -21,7 +20,8 @@ export class Contact extends BaseEntity{
   @Column({default:true})
   active:boolean
 
-  @ManyToOne(() => User,(user) => user.contacts)
-  users:User
+  @ManyToMany(() => User,(user) => user.contact)
+  @JoinTable()
+  user:User[]
 
 }

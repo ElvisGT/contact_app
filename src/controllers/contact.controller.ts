@@ -5,15 +5,13 @@ import { contact } from '../types/contact';
 
 
 const getContacts = async (req:Request,res:Response) => {
-    const id = 3
+    const id = 1
     const user = await User.findOneBy({id,active:true}) || {}
     const contacts = await Contact.find({
-        relations:{
-            users:true
-        },
+        relations:['user'],
         where:{
             active:true,
-            users:user
+            user
         }
     })
 
@@ -43,7 +41,7 @@ const getContactByID = async (req:Request,res:Response) => {
 
 const createContact = async (req:Request,res:Response) => {
     const {name,phonenumber}:contact = req.body
-    const id = 4
+    const id = 2
     const user = await User.findOneBy({id,active:true})
 
 
@@ -51,10 +49,11 @@ const createContact = async (req:Request,res:Response) => {
     contact.name = name
     contact.phonenumber = phonenumber
     if(user){
-        contact.users = user
+       contact.user = [user]
     }
     
-    contact.save()
+    await contact.save()
+    
 
     res.status(201).json({
         msg:"Ok",
