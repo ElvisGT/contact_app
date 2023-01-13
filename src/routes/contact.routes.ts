@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { verifyJWT } from '../middlewares/verify-JWT';
 import { validationAll } from '../middlewares/validation-all';
+import { contact } from '../types/contact';
 import {
 	getContacts,
 	createContact,
