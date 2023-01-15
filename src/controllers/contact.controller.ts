@@ -14,10 +14,9 @@ const getContacts = async (req:Request,res:Response) => {
             user
         }
     })
-
-    res.json({
-        total,
-        contacts
+    res.render("contacts",{
+        contacts,
+        total
     })
 }
 

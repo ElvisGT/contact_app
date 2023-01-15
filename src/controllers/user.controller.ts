@@ -11,7 +11,7 @@ const getUsers = async(req:Request,res:Response) => {
       active:true
     }
   })
-
+  
   res.json({
     msg:"ok",
     total,

@@ -25,7 +25,7 @@ function registerUser(name:string,password:string){
   .then(result => result.json())
   .then(data => {
     const token = data.token
-    const url = 'http://localhost:8080/api/v1/contacts'
+    const url = 'http://localhost:8080/contacts'
     saveLocal(token)
     window.location.replace(url)
   })

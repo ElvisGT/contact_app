@@ -1,7 +1,7 @@
 import contactRoutes from './contact.routes'
 import userRoutes from './users.routes'
-import homeRoutes from './home.routes'
+import frontendRoutes from './frontend.routes'
 
 export {contactRoutes}
 export {userRoutes}
-export {homeRoutes}
+export {frontendRoutes}

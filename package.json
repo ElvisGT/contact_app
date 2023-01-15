@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon dist/src/index.js",
-    "build": "tsc && yarn copyfiles public/*.html dist"
+    "build": "tsc && yarn copyfiles public/*.html dist && yarn copyfiles views/*.hbs dist"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
