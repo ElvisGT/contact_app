@@ -75,8 +75,8 @@ const updateContact = async (req:Request,res:Response) => {
     }
 
     contact.name = name
-    contact.phonenumber = phonenumber
-    contact.save()
+    contact.phonenumber = phonenumber ? phonenumber : contact.phonenumber
+    await contact.save()
 
     res.status(200).json({
         msg:"Updated Ok",
