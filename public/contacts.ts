@@ -24,7 +24,7 @@ fetch(getContacts,{
       <h2>${name}</h2>
         <p>${phonenumber}</p>
       <button onclick="handleEdit(${id})">Edit</button>
-      <button onclick="handleDelete()">Delete</button>
+      <button onclick="handleDelete(${id})">Delete</button>
     `
   });
 })
@@ -50,8 +50,19 @@ function handleEdit(id:number){
   
 }
 
-function handleDelete(){
-  console.log('delete')
+function handleDelete(id:number){
+  const deleteContactApi = `${window.location.origin}/api/v1/contacts/${id}`
+  fetch(deleteContactApi,{
+    method:'Delete',
+    //@ts-ignore
+    headers:{
+      'x-token':token
+    }
+  }).then(result => {
+    if(result.status === 200){
+      window.location.reload()
+    }
+  })
 }
 
 function submitUpdate(event:FormDataEvent,id:number){
