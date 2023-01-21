@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacts</title>
 </head>
 <body>
-   <form onsubmit="handleAddContact(event,id)">
+  <button onclick="logOut()">LogOut</button>
+  <form class="form-contact" id="form-contact" onsubmit="submitContact('Post',event)">
       <label for="name">
         Name
         <input type="text" name="name" id="name" placeholder="Name"/>
@@ -15,7 +15,7 @@
       
       <label for="phonenumber">
         Phone Number
-        <input type="text" name="phonenumber" id="phonenumber" placeholder="Phone Number"/>
+        <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone Number" />
       </label>
 
       <button type="submit">Enter</button>

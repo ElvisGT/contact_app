@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>Register or login</h1>
+  <p class="incorrect-password"></p>
+  <div>
+    <form onsubmit="handleSubmit(event)">
+      <label for="name">
+        Name
+        <input type="text" name="name" id="name" placeholder="Name"/>
+      </label>
+      
+      <label for="password">
+        Password
+        <input type="text" name="password" id="password" placeholder="Password"/>
+      </label>
+
+      <button type="submit">Enter</button>
+    </form>
+  </div>
+  
+  <script src="/form.js"></script>
+  
+</body>
+</html>
