@@ -1,5 +1,5 @@
 
-const getContacts = 'http://localhost:8080/api/v1/contacts'
+const apiContacts = `${window.location.origin}/api/v1/contacts`
 const title = document.querySelector(".contacts-title")
 const card = document.querySelector(".contacts-card")
 const token = localStorage.getItem("token")
@@ -9,7 +9,7 @@ if(!token){
   throw new Error("Token no disponible")
 }
 
-fetch(getContacts,{
+fetch(apiContacts,{
   method:"Get",
   //@ts-ignore
   headers:{
@@ -51,8 +51,8 @@ function handleEdit(id:number){
 }
 
 function handleDelete(id:number){
-  const deleteContactApi = `${window.location.origin}/api/v1/contacts/${id}`
-  fetch(deleteContactApi,{
+  const apiContactsDel = `${apiContacts}/${id}`
+  fetch(apiContactsDel,{
     method:'Delete',
     //@ts-ignore
     headers:{
@@ -67,7 +67,6 @@ function handleDelete(id:number){
 
 function submitUpdate(event:FormDataEvent,id:number){
   event.preventDefault()
-  const updateContacts = `http://localhost:8080/api/v1/contacts/${id}`
   const getName:HTMLInputElement = document.querySelector("#name")!
   const getPhonenumber:HTMLInputElement = document.querySelector("#phonenumber")!
   const name = getName.value
@@ -77,8 +76,8 @@ function submitUpdate(event:FormDataEvent,id:number){
     name,
     phonenumber
   }
-
-  fetch(updateContacts,{
+  const apiContactsPut = `${apiContacts}/${id}`
+  fetch(apiContactsPut,{
     method:"Put",
     //@ts-ignore
     headers:{
@@ -93,4 +92,31 @@ function submitUpdate(event:FormDataEvent,id:number){
       }
     })
     
+}
+
+function handleAddContact(event:FormDataEvent,id:number){
+  event.preventDefault()
+  const getName:HTMLInputElement = document.querySelector("#name")!
+  const getPhonenumber:HTMLInputElement = document.querySelector("#phonenumber")!
+  const name = getName.value
+  const phonenumber = Number(getPhonenumber.value)
+
+  const data = {
+    name,
+    phonenumber
+  }
+  fetch(apiContacts,{
+    method:'Post',
+    //@ts-ignore
+    headers:{
+      'x-token':token,
+      'Content-type':'application/json'
+    },
+    body:JSON.stringify(data)
+  }).then(result => {
+    if(result.status === 201){
+      window.location.reload()
+    }
+  })
+
 }

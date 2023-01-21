@@ -7,8 +7,21 @@
   <title>Contacts</title>
 </head>
 <body>
-  <h1 class="contacts-title">Contacts: </h1>
+   <form onsubmit="handleAddContact(event,id)">
+      <label for="name">
+        Name
+        <input type="text" name="name" id="name" placeholder="Name"/>
+      </label>
+      
+      <label for="phonenumber">
+        Phone Number
+        <input type="text" name="phonenumber" id="phonenumber" placeholder="Phone Number"/>
+      </label>
+
+      <button type="submit">Enter</button>
+    </form>
   <div class="contacts-container">
+    <h1 class="contacts-title">Contacts: </h1>
     <div class="contacts-card">
 
     </div>
