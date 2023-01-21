@@ -14,10 +14,7 @@ router.get('/',getUsers)
 
 router.get('/:id',getUser)
 
-router.post('/',[
-        check('name').custom(validateUserName),
-        validationAll
-],createUser)
+router.post('/',createUser)
 
 router.put('/:id',[
         check('name').custom(validateUserName),

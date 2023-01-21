@@ -1,4 +1,3 @@
-
 function handleSubmit(event:FormDataEvent){
   event.preventDefault()
   const name:HTMLInputElement = document.querySelector("#name")! 
@@ -9,7 +8,8 @@ function handleSubmit(event:FormDataEvent){
 
 
 function registerUser(name:string,password:string){
-  const api = 'http://localhost:8080/api/v1/users'
+  const incorrectPassword = document.querySelector(".incorrect-password")!
+  const api = `${window.location.origin}/api/v1/users`
   const data = {
    name,
    password
@@ -22,10 +22,17 @@ function registerUser(name:string,password:string){
     //@ts-ignore
     body:JSON.stringify(data)
   })
-  .then(result => result.json())
+  .then(result => {
+    if(result.status === 401){
+      incorrectPassword.textContent = 'Password incorrect'
+      throw new Error("Password incorrect");
+      
+    }
+    return result.json()
+  })
   .then(data => {
     const token = data.token
-    const url = 'http://localhost:8080/contacts'
+    const url =`${window.location.origin}/contacts`
     saveLocal(token)
     window.location.replace(url)
   })
@@ -33,7 +40,6 @@ function registerUser(name:string,password:string){
 }
 
 function saveLocal(token:string){
-  if(!localStorage.getItem("token")){
+    localStorage.clear()
     localStorage.setItem("token",token)
-  }
 }

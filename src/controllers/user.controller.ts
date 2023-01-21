@@ -1,5 +1,5 @@
 import {Request,Response} from 'express'
-import {genSaltSync,hashSync} from 'bcryptjs'
+import {genSaltSync,hashSync,compareSync} from 'bcryptjs'
 import {User} from '../entities/index'
 import { user } from '../types/user';
 import {generateJWT} from '../helpers/generateJwt'
@@ -34,12 +34,23 @@ const createUser = async(req:Request,res:Response) => {
   const salt = genSaltSync()
   const hashedPassword = hashSync(password,salt)
 
+  let user = await User.findOneBy({name})
 
-  const user = new User()
-  user.name = name
-  user.password = hashedPassword
+  if(!user){
+    user = new User()
+    user.name = name
+    user.password = hashedPassword
+  
+    await user.save()
+  }
 
-  await user.save()
+  const passwordExists = compareSync(password,user.password)
+
+  if(!passwordExists){
+    return res.status(401).json({
+      msg:"Password incorrecta"
+    })
+  }
 
   //Generar JWT
   const token = await generateJWT(user.id)
