@@ -1,54 +1,56 @@
-import {Request,Response} from 'express'
-import {genSaltSync,hashSync,compareSync} from 'bcryptjs'
-import {User} from '../entities/index'
+import { Request, Response } from 'express'
+import { genSaltSync, hashSync, compareSync } from 'bcryptjs'
+import { User } from '../entities/index'
 import { user } from '../types/user';
-import {generateJWT} from '../helpers/generateJwt'
+import { generateJWT } from '../helpers/generateJwt'
 
-const getUsers = async(req:Request,res:Response) => {
-  const total = await User.countBy({active:true})
-  const users = await User.find({
-    where:{
-      active:true
+import {myCache} from '../app'
+
+const getUsers = async (req: Request, res: Response) => {
+    const total = await User.countBy({ active: true })
+    const users = await User.find({
+      where: {
+        active: true
+      }
+    })
+    const result = {
+      total,
+      users
     }
-  })
-  
-  res.json({
-    msg:"ok",
-    total,
-    users
-  })
+    myCache.set("result",result)
+    res.status(200).json(result)
 }
-const getUser = async(req:Request,res:Response) => {
+const getUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
 
-  const user = await User.findOneBy({id})
+  const user = await User.findOneBy({ id })
 
   res.status(200).json({
     user
   })
 
 }
-const createUser = async(req:Request,res:Response) => {
-  const {name,password}:user = req.body
+const createUser = async (req: Request, res: Response) => {
+  const { name, password }: user = req.body
 
   const salt = genSaltSync()
-  const hashedPassword = hashSync(password,salt)
+  const hashedPassword = hashSync(password, salt)
 
-  let user = await User.findOneBy({name})
+  let user = await User.findOneBy({ name })
 
-  if(!user){
+  if (!user) {
     user = new User()
     user.name = name
     user.password = hashedPassword
-  
+
     await user.save()
   }
 
-  const passwordExists = compareSync(password,user.password)
+  const passwordExists = compareSync(password, user.password)
 
-  if(!passwordExists){
+  if (!passwordExists) {
     return res.status(401).json({
-      msg:"Password incorrecta"
+      msg: "Password incorrecta"
     })
   }
 
@@ -58,24 +60,24 @@ const createUser = async(req:Request,res:Response) => {
     .catch(err => res.status(400).json(err))
 
   res.status(201).json({
-    msg:'OK',
+    msg: 'OK',
     token,
     user
   })
 
 }
-const updateUser = async(req:Request,res:Response) => {
-  const {name,password}:user = req.body
+const updateUser = async (req: Request, res: Response) => {
+  const { name, password }: user = req.body
   const id = parseInt(req.params.id)
 
-  const user = await User.findOneBy({id,active:true})
-  
-  if(!user){
+  const user = await User.findOneBy({ id, active: true })
+
+  if (!user) {
     return res.status(400).json({
-      msg:"Usuario no existente"
+      msg: "Usuario no existente"
     })
   }
-  
+
   user.name = name
   user.password = password
   user.save()
@@ -84,12 +86,12 @@ const updateUser = async(req:Request,res:Response) => {
     user
   })
 }
-const deleteUser = async(req:Request,res:Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
 
-  const user = await User.findOneBy({id})
+  const user = await User.findOneBy({ id })
 
-  if(user){
+  if (user) {
     user.active = false
     user.save()
   }

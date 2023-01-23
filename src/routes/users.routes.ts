@@ -7,10 +7,14 @@ import { createUser,
         getUser, 
         getUsers, 
         updateUser } from "../controllers/user.controller"
+import { getCache } from "../middlewares/get-cache";
 
 const router = Router()
 
-router.get('/',getUsers)
+router.get('/',[
+        getCache,
+        validationAll
+],getUsers)
 
 router.get('/:id',getUser)
 

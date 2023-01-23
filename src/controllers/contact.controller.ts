@@ -1,4 +1,5 @@
 import { Request,Response } from 'express'
+import { myCache } from '../app';
 import {Contact} from '../entities/Contact'
 import { contact } from '../types/contact';
 
@@ -14,10 +15,12 @@ const getContacts = async (req:Request,res:Response) => {
             user
         }
     })
-    res.status(200).json({
+    const result = {
         total,
         contacts
-    })
+    }
+    myCache.set('result',result)
+    res.status(200).json(result)
 }
 
 const getContactByID = async (req:Request,res:Response) => {
@@ -55,7 +58,6 @@ const createContact = async (req:Request,res:Response) => {
     
     await contact.save()
     
-
     res.status(201).json({
         msg:"Ok",
         contact

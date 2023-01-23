@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express"
+import nodeCache from 'node-cache'
 import path from 'path'
 import cors from 'cors'
 import {userRoutes,
@@ -7,6 +8,7 @@ import {userRoutes,
 
 
 const app: express.Application = express()
+export const myCache = new nodeCache({stdTTL:15})
 
 //paths
 const paths = {
