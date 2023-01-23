@@ -8,7 +8,7 @@ import {
 	getContactByID,
 	deleteContact
 } from '../controllers/contact.controller'
-import { getCache } from '../middlewares/get-cache';
+import { getCacheAll, getCacheOne } from '../middlewares/get-cache';
 import { clearCache } from '../middlewares/clear-cache';
 
 const router = Router()
@@ -17,13 +17,15 @@ router.get('/',
 
 	[	
 		verifyJWT,
-		getCache,
+		getCacheAll,
 		validationAll
 	],
 	getContacts)
 
 router.get('/:id',
-	[verifyJWT,
+	[	
+		verifyJWT,
+		getCacheOne,
 		validationAll
 	], getContactByID)
 

@@ -7,12 +7,12 @@ import { createUser,
         getUser, 
         getUsers, 
         updateUser } from "../controllers/user.controller"
-import { getCache } from "../middlewares/get-cache";
+import { getCacheAll } from "../middlewares/get-cache";
 
 const router = Router()
 
 router.get('/',[
-        getCache,
+        getCacheAll,
         validationAll
 ],getUsers)
 

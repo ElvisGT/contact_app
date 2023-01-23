@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6rem;
+}
+
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.welcome-container > h1 {
+    margin-bottom: 5rem;
+}
+.welcome-container > button {
+    width: 10rem;
+    height: 5rem;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3rem;
+    box-shadow: 0 .7rem rgba(0,0,0,0.56);
+}
+.welcome-container > button:hover {
+    cursor: pointer;
+    background-color: red;
+    transition: .3s;
+
+
+}
+.welcome-container > button:active {
+    box-shadow: none;
+
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    margin-top: -5rem;
+}
+
+
+.register-title {
+    font-style: italic;
+}
+
+
+.register-form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 20rem;
+    height: 15rem;
+    margin-top: 3rem;
+}
+
+.register-form  > .incorrect-password {
+    font-size: 2rem;
+    color: crimson;
+}
+
+.register-form  .name,.password{
+    padding: 1rem;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 3rem;
+    border-color: black;
+}
+
+.register-form > button {
+    width: 6rem;
+    height: 3rem;
+    margin-top: 2rem;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3rem;
+    box-shadow: 0 .7rem rgba(0,0,0,0.56);
+}
+
+.register-form > button:hover {
+    cursor: pointer;
+    background-color: red;
+    transition: .3s;
+
+
+}
+.register-form > button:active {
+    box-shadow: none;
+
+}

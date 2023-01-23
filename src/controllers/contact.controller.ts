@@ -19,7 +19,7 @@ const getContacts = async (req:Request,res:Response) => {
         total,
         contacts
     }
-    myCache.set('result',result)
+    myCache.set('results',result)
     res.status(200).json(result)
 }
 
@@ -38,10 +38,8 @@ const getContactByID = async (req:Request,res:Response) => {
         })
     }
 
-    res.status(200).json({
-        msg:"Ok",
-        contact
-    })
+    myCache.set('result',contact)
+    res.status(200).json(contact)
 }
 
 const createContact = async (req:Request,res:Response) => {

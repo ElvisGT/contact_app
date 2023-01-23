@@ -17,7 +17,7 @@ const getUsers = async (req: Request, res: Response) => {
       total,
       users
     }
-    myCache.set("result",result)
+    myCache.set("results",result)
     res.status(200).json(result)
 }
 const getUser = async (req: Request, res: Response) => {
