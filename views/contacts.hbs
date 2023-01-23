@@ -4,26 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/main.css" rel="stylesheet"/>
 </head>
 <body>
-  <button onclick="logOut()">LogOut</button>
-  <form class="form-contact" id="form-contact" onsubmit="submitContact('Post',event)">
-      <label for="name">
-        Name
-        <input type="text" name="name" id="name" placeholder="Name"/>
-      </label>
-      
-      <label for="phonenumber">
-        Phone Number
-        <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone Number" />
-      </label>
-
-      <button type="submit">Enter</button>
-    </form>
-  <div class="contacts-container">
-    <h1 class="contacts-title">Contacts: </h1>
-    <div class="contacts-card">
-
+  <div class="contacts">
+    <div class="contacts-buttons-container">
+      <button id="addNew-btn" onclick="addNew()">New</button>
+      <button id="logOut-btn" onclick="logOut()">LogOut</button>
+      <button id="back-btn" onclick="backBtn()">Back</button>
+    </div>
+    <div id="contacts-form-container"></div>
+    <div class="contacts-container">
+      <h1 class="contacts-title">Contacts: </h1>
+      <div class="contacts-card-container"></div>
     </div>
   </div>
   <script src="/contacts.js"></script>
