@@ -48,8 +48,6 @@ function handleUpdate(id: number) {
     .then(result => {
       if (result.ok) {
         return result.json()
-      } else {
-        throw new Error('Ha ocurrido un error')
       }
     })
     .then(data => {
@@ -129,13 +127,27 @@ function submitContact(useMethod: string, id?: number, event?: FormDataEvent) {
         window.location.reload()
       }
     })
+    
 
 }
 
 function logOut() {
-  const url = `${window.location.origin}/users`
-  localStorage.clear()
-  window.location.replace(url)
+  const apiLogout = `${window.location.origin}/api/v1/users/logout`
+  fetch(apiLogout,{
+    method:"Get",
+    //@ts-ignore
+    headers:{
+      'x-token':token
+    }
+  })
+  .then(result => {
+    if(result.ok){
+      const url = `${window.location.origin}/users`
+      localStorage.clear()
+      window.location.replace(url)
+    }
+  })
+ 
 }
 
 function addNew(){

@@ -2,14 +2,22 @@ import { Router } from "express"
 import {check} from 'express-validator'
 import { validateUserName } from '../middlewares/validation-user';
 import {validationAll} from '../middlewares/validation-all'
-import { createUser, 
+import { closeSession, createUser, 
         deleteUser, 
         getUser, 
         getUsers, 
         updateUser } from "../controllers/user.controller"
 import { getCacheAll } from "../middlewares/get-cache";
+import { verifyJWT } from "../middlewares/verify-JWT";
+import { clearCache } from "../middlewares/clear-cache";
 
 const router = Router()
+
+router.get('/logout',[
+        verifyJWT,
+        clearCache,
+        validationAll
+],closeSession)
 
 router.get('/',[
         getCacheAll,

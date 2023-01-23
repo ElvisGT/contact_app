@@ -6,6 +6,12 @@ import { generateJWT } from '../helpers/generateJwt'
 
 import {myCache} from '../app'
 
+export const closeSession = (req:Request,res:Response) => {
+  res.status(200).json({
+    msg:"Logout"
+  })
+}
+
 const getUsers = async (req: Request, res: Response) => {
     const total = await User.countBy({ active: true })
     const users = await User.find({
