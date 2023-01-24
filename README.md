@@ -1,7 +1,7 @@
 # App de Contacto
 
 ## Descripcion:
-App que sirve como agenda de contactos online donde puedes guardar esos contactos que deseas que no se pierdan si se borran de tu telefono
+App que sirve como agenda de contactos online donde puedes guardar esos contactos que deseas que no se pierdan si se borran de tu telefono. El enfoque principal está en el Backend donde puse mayor atención a los detalles e hice implementaciones para mejorar el rendimiento y buena seguridad de la app. El frontend está hecho con Vanilla JavaScript y se renderiza con un motor desde el propio Backend
 
 <h2>Tabla de contenido:</h2>
 
@@ -34,9 +34,11 @@ App que sirve como agenda de contactos online donde puedes guardar esos contacto
 <h3 id="Stack">Stack utilizado:</h3>
 
 1. Node.js
-2. Express.js
-4. TypeScript
-5. MySql
+2. Vanilla JavaScript
+4. Express.js
+5. Handlebars
+6. TypeScript
+7. MySql
 
 <h3 id="Lic">Licencia:</h3>
 Este proyecto cuenta con la licencia MIT
