@@ -16,7 +16,7 @@ App que sirve como agenda de contactos online donde puedes guardar esos contacto
 6. <a href="#Author">Autor</a>
 
 <h3 id="Demo">Demo:</h3>
-<a >Aqui</a>
+<a >#TODO: Hacer el deploy de la app a produccion</a>
 <img src="https://i.ibb.co/P9SCkSy/1.png" alt="imagen demo">
 <hr>
 <img src="https://i.ibb.co/V9RtRNr/2.png" alt="imagen demo">
